@@ -37,7 +37,35 @@ class Tree
   # outward from the root. Looks for any node with key equal
   # to the +target_key+ param. Returns nil if no such node is found.
   def breadth_first_search(target_key)
-    nil
+    # Establish Queue
+    queue = []
+    # See if tree root is the target
+    if my_tree.key == target_key
+      return my_tree
+    # If its not, add children to queue
+    else 
+      queue.push(my_tree.children)
+      p queue
+    end
+    
+    # So long as queue is not empty
+    while queue.length > 0
+      # Grab first element and check it
+      current_element = queue.shift
+      if current_element.key == target_key
+        return current_element
+      # If its not, grab its children and add to queue
+      else
+        queue.push(current_element.children)
+      end
+      p queue
+    end
+
+    # If we run out of options, key couldn't be found.
+    if queue.length == 0
+      return "Target Key Cannot Be Found"
+    end
+  
   end
 
 end
